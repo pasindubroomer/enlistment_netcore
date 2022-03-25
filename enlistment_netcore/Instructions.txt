@@ -1,0 +1,1 @@
+Scaffold-DbContext "Data Source=.;Initial Catalog=enlistment;Integrated Security=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Context EnlistmentDBContext -contextdir Data -Force

@@ -1,0 +1,537 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="container">
+    <br />
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <form class="form" id="eligibiity_form">
+                        @Html.AntiForgeryToken()
+
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <h3> Check Eligibility </h3>
+                                <hr />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>
+                                        Email address
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <select id="studentship" name="studentship" class="form-control">
+                                        <option value="dayscholar" selected>Day Scholar</option>
+                                        <option value="cadet">Cadet</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>
+                                        Date of birth
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input class="form-control" type="date" value="2011-08-19" id="date_of_birth" name="date_of_birth" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="exampleSelect1">
+                                        Gender
+                                        <span class="text-danger">*</span>
+                                    </label>
+
+                                    <div class="radio-inline mt-2">
+                                        <label class="radio radio-outline radio-outline-2x radio-primary">
+                                            <input type="radio" name="gender_status" checked="checked">
+                                            <span></span>Male
+                                        </label>
+                                        <label class="radio radio-outline radio-outline-2x radio-primary">
+                                            <input type="radio" name="gender_status">
+                                            <span></span>Female
+                                        </label>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">
+                                        NIC or Passport Number
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" class="form-control" id="nic_passport" name="nic_passport" placeholder="" required value="922581088V">
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>
+                                        Citizenship
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <select id="citizenship" name="citizenship" class="form-control">
+                                        <option value="local" selected>Srilankan</option>
+                                        <option value="foreigner">Foreigner</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="exampleSelect1">
+                                        Civil Status
+                                        <span class="text-danger">*</span>
+                                    </label>
+
+                                    <div class="radio-inline mt-2">
+                                        <label class="radio radio-outline radio-outline-2x radio-primary">
+                                            <input type="radio" name="civil_status" id="single" value="single" checked="checked">
+                                            <span></span>Single
+                                        </label>
+                                        <label class="radio radio-outline radio-outline-2x radio-primary">
+                                            <input type="radio" name="civil_status" id="married" value="married">
+                                            <span></span>Married
+                                        </label>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <h3> Advance Level Result (GCE) </h3>
+                                <hr />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 mb-2">
+                                <div class="form-group">
+                                    <label for="stream" class="form-label required-field-label">A/L Stream</label>
+                                    <select id="stream" name="stream" class="form-control">
+                                        <option value="Bio" selected>Bio Science</option>
+                                        <option value="Maths">Maths</option>
+                                        <option value="Commerce">Commerce</option>
+                                        <option value="Arts">Arts</option>
+                                        <option value="Technology">Technology</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <div class="form-group">
+                                    <label for="al_year" class="form-label required-field-label">A/L year</label>
+                                    <select id="al_year" name="al_year" class="form-control">
+                                        <option value="2010">2010</option>
+                                        <option value="2011">2011</option>
+                                        <option value="2012">2012</option>
+                                        <option value="2013">2013</option>
+                                        <option value="2014">2014</option>
+                                        <option value="2015">2015</option>
+                                        <option value="2016">2016</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2021" selected>2021</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <div class="form-group">
+                                    <label for="al_attep" class="form-label required-field-label">A/L Attempt</label>
+                                    <select id="al_attep" name="al_attempt" class="form-control">
+                                        <option selected>01</option>
+                                        <option>02</option>
+                                        <option>03</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-2">
+                            <div class="col-md-12 table-responsive">
+                                <div class="form-group">
+                                    <table class="table  table-bordered">
+
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Subject</th>
+                                                <th scope="col">Grade</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>
+                                                    <div class="col-md-8">
+                                                        <select id="al_subject1" name="al_subject1" class="form-control">
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="col-md-5">
+                                                        <select id="al_subject1_grade" name="al_subject1_grade" class="form-control">
+                                                            <option value="A" selected>A</option>
+                                                            <option value="B">B</option>
+                                                            <option value="C">C</option>
+                                                            <option value="S">S</option>
+                                                            <option value="F">F</option>
+                                                            <option value="AB">AB</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                <td>
+                                                    <div class="col-md-8">
+                                                        <select id="al_subject2" name="al_subject2" class="form-control">
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="col-md-5">
+                                                        <select id="al_subject2_grade" name="al_subject2_grade" class="form-control">
+                                                            <option value="A" selected>A</option>
+                                                            <option value="B">B</option>
+                                                            <option value="C">C</option>
+                                                            <option value="S">S</option>
+                                                            <option value="F">F</option>
+                                                            <option value="AB">AB</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td>
+                                                    <div class="col-md-8">
+                                                        <select id="al_subject3" name="al_subject3" class="form-control">
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="col-md-5">
+                                                        <select id="al_subject3_grade" name="al_subject3_grade" class="form-control">
+                                                            <option value="A" selected>A</option>
+                                                            <option value="B">B</option>
+                                                            <option value="C">C</option>
+                                                            <option value="S">S</option>
+                                                            <option value="F">F</option>
+                                                            <option value="AB">AB</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="al_english_grade" class="form-label required-field-label">A/L English <span class="text-danger">*</span></label>
+                                    <select id="al_english_grade" name="al_english_grade" class="form-control">
+                                        <option selected>A</option>
+                                        <option>B</option>
+                                        <option>C</option>
+                                        <option>S</option>
+                                        <option>F</option>
+                                        <option>AB</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-2">
+                                <div class="form-group">
+                                    <label for="al_english_year" class="form-label required-field-label">Year <span class="text-danger">*</span></label>
+                                    <select id="al_english_year" name="al_english_year" class="form-control">
+                                        <option value="2010">2010</option>
+                                        <option value="2011">2011</option>
+                                        <option value="2012">2012</option>
+                                        <option value="2013">2013</option>
+                                        <option value="2014">2014</option>
+                                        <option value="2015">2015</option>
+                                        <option value="2016">2016</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2021" selected>2021</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="general_english_marks" class="form-label required-field-label">General Test</label>
+                                    <input type="number" class="form-control" id="general_english_marks" name="general_english_marks" value="0.00" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="general_english_year" class="form-label required-field-label">Year</label>
+                                    <select id="general_english_year" name="general_english_year" class="form-control">
+                                        <option value="2010">2010</option>
+                                        <option value="2011">2011</option>
+                                        <option value="2012">2012</option>
+                                        <option value="2013">2013</option>
+                                        <option value="2014">2014</option>
+                                        <option value="2015">2015</option>
+                                        <option value="2016">2016</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2021" selected>2021</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 mb-2">
+                                <div class="form-group">
+                                    <label for="qualified_university" class="form-label required-field-label">Qualified for University</label>
+                                    <select id="qualified_university" name="qualified_university" class="form-control">
+                                        <option selected>Yes</option>
+                                        <option>No</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <h3> Ordinary Level Result (GCE) </h3>
+                                <hr />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12 table-responsive">
+                                <div class="form-group">
+                                    <table class="table table-bordered">
+                                        <thead class="table-dark">
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Subject</th>
+                                                <th scope="col">Grade</th>
+                                                <th scope="col">Index</th>
+                                                <th scope="col">Year</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>
+                                                    <div class="col-md-12">
+                                                        Maths
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="col-md-12">
+                                                        <select id="maths_ol_grade" name="maths_ol_grade" class="form-control">
+                                                            <option value="A" selected>A</option>
+                                                            <option value="B">B</option>
+                                                            <option value="C">C</option>
+                                                            <option value="S">S</option>
+                                                            <option value="F">F</option>
+                                                            <option value="AB">AB</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="col-md-12">
+                                                        <input type="number" class="form-control" id="maths_ol_index" name="maths_ol_index" required value="2012">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="col-md-12">
+                                                        <select id="maths_ol_year" name="maths_ol_year" class="form-control">
+                                                            <option value="2010">2010</option>
+                                                            <option value="2011">2011</option>
+                                                            <option value="2012">2012</option>
+                                                            <option value="2013">2013</option>
+                                                            <option value="2014">2014</option>
+                                                            <option value="2015">2015</option>
+                                                            <option value="2016">2016</option>
+                                                            <option value="2017">2017</option>
+                                                            <option value="2018">2018</option>
+                                                            <option value="2019">2019</option>
+                                                            <option value="2020">2020</option>
+                                                            <option value="2021" selected>2021</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                <td>
+                                                    <div class="col-md-12">
+                                                        Science
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="col-md-12">
+                                                        <select id="science_ol_grade" name="science_ol_grade" class="form-control">
+                                                            <option value="A" selected>A</option>
+                                                            <option value="B">B</option>
+                                                            <option value="C">C</option>
+                                                            <option value="S">S</option>
+                                                            <option value="F">F</option>
+                                                            <option value="AB">AB</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="col-md-12">
+                                                        <input type="number" class="form-control" id="science_ol_index" name="science_ol_index" required value="2012">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="col-md-12">
+                                                        <select id="science_ol_year" name="science_ol_year" class="form-control">
+                                                            <option value="2010">2010</option>
+                                                            <option value="2011">2011</option>
+                                                            <option value="2012">2012</option>
+                                                            <option value="2013">2013</option>
+                                                            <option value="2014">2014</option>
+                                                            <option value="2015">2015</option>
+                                                            <option value="2016">2016</option>
+                                                            <option value="2017">2017</option>
+                                                            <option value="2018">2018</option>
+                                                            <option value="2019">2019</option>
+                                                            <option value="2020">2020</option>
+                                                            <option value="2021" selected>2021</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td>
+                                                    <div class="col-md-12">
+                                                        Sinhala/Tamil
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="col-md-12">
+                                                        <select id="sinhalatamil_ol_grade" name="sinhalatamil_ol_grade" class="form-control">
+                                                            <option value="A" selected>A</option>
+                                                            <option value="B">B</option>
+                                                            <option value="C">C</option>
+                                                            <option value="S">S</option>
+                                                            <option value="F">F</option>
+                                                            <option value="AB">AB</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="col-md-12">
+                                                        <input type="number" class="form-control" id="sinhalatamil_ol_index" name="sinhalatamil_ol_index" required value="2012">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="col-md-12">
+                                                        <select id="sinhalatamil_ol_year" name="sinhalatamil_ol_year" class="form-control">
+                                                            <option value="2010">2010</option>
+                                                            <option value="2011">2011</option>
+                                                            <option value="2012">2012</option>
+                                                            <option value="2013">2013</option>
+                                                            <option value="2014">2014</option>
+                                                            <option value="2015">2015</option>
+                                                            <option value="2016">2016</option>
+                                                            <option value="2017">2017</option>
+                                                            <option value="2018">2018</option>
+                                                            <option value="2019">2019</option>
+                                                            <option value="2020">2020</option>
+                                                            <option value="2021" selected>2021</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">4</th>
+                                                <td>
+                                                    <div class="col-md-12">
+                                                        O/L English
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="col-md-12">
+                                                        <select id="english_ol_grade" name="english_ol_grade" class="form-control">
+                                                            <option value="A" selected>A</option>
+                                                            <option value="B">B</option>
+                                                            <option value="C">C</option>
+                                                            <option value="S">S</option>
+                                                            <option value="F">F</option>
+                                                            <option value="AB">AB</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="col-md-12">
+                                                        <input type="number" class="form-control" id="english_ol_index" name="english_ol_index" required value="2012">
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <div class="col-md-12">
+                                                        <select id="english_ol_year" name="english_ol_year" class="form-control">
+                                                            <option value="2010">2010</option>
+                                                            <option value="2011">2011</option>
+                                                            <option value="2012">2012</option>
+                                                            <option value="2013">2013</option>
+                                                            <option value="2014">2014</option>
+                                                            <option value="2015">2015</option>
+                                                            <option value="2016">2016</option>
+                                                            <option value="2017">2017</option>
+                                                            <option value="2018">2018</option>
+                                                            <option value="2019">2019</option>
+                                                            <option value="2020">2020</option>
+                                                            <option value="2021" selected>2021</option>
+                                                        </select>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between border-top mt-5 pt-10">
+                            <div class="mr-2">
+                                <button type="submit" class="btn btn-success font-weight-bolder text-uppercase px-9 py-4" data-wizard-type="action-submit">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script src="~/js/pages/user/user_eligibility.js"></script>
