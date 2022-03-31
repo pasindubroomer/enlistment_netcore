@@ -388,7 +388,7 @@ namespace enlistment_netcore.Controllers
                 String al_subject3_grade = formDataAll.Where(x => x.name == "al_subject3_grade").Select(x => x.value).SingleOrDefault();
                 String al_english_grade = formDataAll.Where(x => x.name == "al_english_grade").Select(x => x.value).SingleOrDefault();
                 String al_english_year = formDataAll.Where(x => x.name == "al_english_year").Select(x => x.value).SingleOrDefault();
-                String general_english_marks = formDataAll.Where(x => x.name == "general_english_marks").Select(x => x.value).SingleOrDefault();
+                String general_test_marks = formDataAll.Where(x => x.name == "general_test_marks").Select(x => x.value).SingleOrDefault();
                 String qualified_university = formDataAll.Where(x => x.name == "qualified_university").Select(x => x.value).SingleOrDefault();
                 String z_score = formDataAll.Where(x => x.name == "z_score").Select(x => x.value).SingleOrDefault();
                 String maths_ol_grade = formDataAll.Where(x => x.name == "maths_ol_grade").Select(x => x.value).SingleOrDefault();
@@ -443,350 +443,371 @@ namespace enlistment_netcore.Controllers
                 DateTime ageCalculationDate = _iEnlistment.GetAgeCalculationDate();
                 DateTime birthdayDateTime = DateTime.ParseExact(date_of_birth, "yyyy-MM-dd", CultureInfo.InvariantCulture);
 
-                int age = ageCalculationDate.Year - birthdayDateTime.Year;
+
+                DateTime birthDay17Year = birthdayDateTime.AddYears(17);
+                DateTime birthDay30Year = birthdayDateTime.AddYears(30);
+                DateTime birthDay24Year = birthdayDateTime.AddYears(24);
+
+                double int_general = double.Parse(general_test_marks);
 
                 if (studentship == "dayscholar")
                 {
-                    ///////////////// Faculty of Defence & Strategic Studies
-                    ///////////////// BSc Strategic Studies & International Relations
-                    if (al_min_s_pass_count >= 3)
+                    if (al_year == "2019" || al_year == "2020")
                     {
-                        degree_list.Add("BSI");
-                    }
-
-                    ///////////////// Faculty of Engineering
-                    ///////////////// BSc (Hons) Engineering [Aeronautical/ Biomedical/ Civil / Electrical & Electronic/ Electronic & Telecommunication/ Mechanical / Mechatronic Engineering]
-                    if (stream == "Maths")
-                    {
-                        if (al_subject1 == "2" || al_subject1 == "4" || al_subject1 == "11")
+                        if (int_general >= 30)
                         {
-                            if (al_subject2 == "2" || al_subject2 == "4" || al_subject2 == "11")
+                            if (english_ol_grade != "AB" && english_ol_grade != "F" && english_ol_grade != "C")
                             {
-                                if (al_subject3 == "2" || al_subject3 == "4" || al_subject3 == "11")
+                                if (ageCalculationDate <= birthDay24Year && ageCalculationDate >= birthDay17Year)
                                 {
-                                    if ((al_min_c_pass_count >= 3) || (al_min_c_pass_count >= 2 && (al_min_s_pass_count - al_min_c_pass_count) >= 1))
+                                    ///////////////// Faculty of Defence & Strategic Studies
+                                    ///////////////// BSc Strategic Studies & International Relations
+                                    if (al_min_s_pass_count >= 3)
                                     {
-                                        degree_list.Add("ENG");
+                                        degree_list.Add("BSI");
+                                    }
+
+                                    ///////////////// Faculty of Engineering
+                                    ///////////////// BSc (Hons) Engineering [Aeronautical/ Biomedical/ Civil / Electrical & Electronic/ Electronic & Telecommunication/ Mechanical / Mechatronic Engineering]
+                                    if (stream == "Maths")
+                                    {
+                                        if (al_subject1 == "2" || al_subject1 == "4" || al_subject1 == "11")
+                                        {
+                                            if (al_subject2 == "2" || al_subject2 == "4" || al_subject2 == "11")
+                                            {
+                                                if (al_subject3 == "2" || al_subject3 == "4" || al_subject3 == "11")
+                                                {
+                                                    if ((al_min_c_pass_count >= 3) || (al_min_c_pass_count >= 2 && (al_min_s_pass_count - al_min_c_pass_count) >= 1))
+                                                    {
+                                                        degree_list.Add("ENG");
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                    }
+
+                                    ///////////////// Faculty of Management, Social Sciences and Humanities
+                                    ///////////////// BSc Management & Technical Sciences
+                                    if (stream == "Maths" || stream == "Bio")
+                                    {
+                                        if ((al_min_s_pass_count >= 3))
+                                        {
+                                            degree_list.Add("MTS");
+                                        }
+                                    }
+
+                                    ///////////////// Faculty of Management, Social Sciences and Humanities
+                                    ///////////////// BSc Logistics Management
+                                    if (stream == "Maths" || stream == "Bio" || stream == "Commerce")
+                                    {
+                                        if ((al_min_s_pass_count >= 3))
+                                        {
+                                            degree_list.Add("BLM");
+                                        }
+                                    }
+
+                                    ///////////////// Faculty of Management, Social Sciences and Humanities
+                                    ///////////////// BSc Social Sciences
+                                    if ((al_min_s_pass_count >= 3))
+                                    {
+                                        degree_list.Add("BSS");
+                                    }
+
+                                    ///////////////// Faculty of Management, Social Sciences and Humanities
+                                    ///////////////// BSc in Applied Data Science Communication
+                                    if (stream == "Maths" || stream == "Bio" || stream == "Commerce" || stream == "Arts" || stream == "Technology")
+                                    {
+                                        if (stream == "Arts")
+                                        {
+                                            if ((al_subject1 == "38" || al_subject1 == "91") || (al_subject2 == "38" || al_subject2 == "91") || (al_subject3 == "38" || al_subject3 == "91"))
+                                            {
+                                                if (maths_ol_grade != "F" && maths_ol_grade != "AB" && maths_ol_grade != "S")
+                                                {
+                                                    degree_list.Add("ADC");
+                                                }
+                                            }
+                                        }
+                                        else if ((al_min_s_pass_count >= 3))
+                                        {
+                                            degree_list.Add("ADC");
+                                        }
+                                    }
+
+                                    ///////////////// Faculty of Management, Social Sciences and Humanities
+                                    ///////////////// BA in Teaching English to Speakers of Other Languages(TESOL)
+                                    if ((al_min_s_pass_count >= 3))
+                                    {
+                                        if (english_ol_grade == "A" || english_ol_grade == "B")
+                                        {
+                                            degree_list.Add("BTE");
+                                        }
+                                    }
+
+                                    ///////////////// Faculty of Computing
+                                    ///////////////// [BSc (Hons) Computer Science ,BSc (Hons) Software Engineering , BSc (Hons) Computer Engineering]
+                                    if (stream == "Maths" || stream == "Other")
+                                    {
+                                        if ((al_min_s_pass_count >= 3))
+                                        {
+                                            degree_list.Add("BCE");
+                                            degree_list.Add("BSE");
+                                            degree_list.Add("BCS");
+                                        }
+                                    }
+
+                                    ///////////////// Faculty of Computing
+                                    ///////////////// [BSc (Hons) Data Science and Business Analytics]
+                                    if (stream == "Maths")
+                                    {
+                                        if ((al_min_s_pass_count >= 3))
+                                        {
+                                            degree_list.Add("DBA");
+                                        }
+                                    }
+
+                                    ///////////////// Faculty of Allied Health Sciences 
+                                    ///////////////// BSc (Hons) Nursing (Payment Basis)
+                                    if (stream == "Maths" || stream == "Bio")
+                                    {
+                                        if ((al_min_s_pass_count >= 3))
+                                        {
+                                            degree_list.Add("BNP");
+                                        }
+                                    }
+
+                                    ///////////////// Faculty of Allied Health Sciences 
+                                    ///////////////// BSc (Hons) Nursing 
+                                    if (stream == "Maths" || stream == "Bio")
+                                    {
+                                        if ((al_subject1 == "3" || al_subject1 == "4"))
+                                        {
+                                            if ((al_subject1_grade != "F" && al_subject1_grade != "AB" && al_subject1_grade != "S") && (al_min_s_pass_count >= 3))
+                                            {
+                                                degree_list.Add("PMY");
+                                                degree_list.Add("MLS");
+                                            }
+                                        }
+                                        else if ((al_subject2 == "3" || al_subject2 == "4"))
+                                        {
+                                            if ((al_subject2_grade != "F" && al_subject2_grade != "AB" && al_subject2_grade != "S") && (al_min_s_pass_count >= 3))
+                                            {
+                                                degree_list.Add("PMY");
+                                                degree_list.Add("MLS");
+                                            }
+                                        }
+                                        else if ((al_subject3 == "3" || al_subject3 == "4"))
+                                        {
+                                            if ((al_subject3_grade != "F" && al_subject3_grade != "AB" && al_subject3_grade != "S") && (al_min_s_pass_count >= 3))
+                                            {
+                                                degree_list.Add("PMY");
+                                                degree_list.Add("MLS");
+                                            }
+                                        }
+                                    }
+
+                                    ///////////////// Faculty of Allied Health Sciences 
+                                    ///////////////// [ BSc Honours in Physiotherapy / Radiography / Radiotherapy degree programme]
+                                    if (stream == "Maths" || stream == "Bio")
+                                    {
+                                        if ((al_subject1 == "1" || al_subject1 == "2"))
+                                        {
+                                            if ((al_subject1_grade != "F" && al_subject1_grade != "AB" && al_subject1_grade != "S") && (al_min_s_pass_count >= 3))
+                                            {
+                                                degree_list.Add("PST");
+                                                degree_list.Add("RGY");
+                                                degree_list.Add("RTP");
+                                            }
+                                        }
+                                        else if ((al_subject2 == "1" || al_subject2 == "2"))
+                                        {
+                                            if ((al_subject2_grade != "F" && al_subject2_grade != "AB" && al_subject2_grade != "S") && (al_min_s_pass_count >= 3))
+                                            {
+                                                degree_list.Add("PST");
+                                                degree_list.Add("RGY");
+                                                degree_list.Add("RTP");
+                                            }
+                                        }
+                                        else if ((al_subject3 == "1" || al_subject3 == "2"))
+                                        {
+                                            if ((al_subject3_grade != "F" && al_subject3_grade != "AB" && al_subject3_grade != "S") && (al_min_s_pass_count >= 3))
+                                            {
+                                                degree_list.Add("PST");
+                                                degree_list.Add("RGY");
+                                                degree_list.Add("RTP");
+                                            }
+                                        }
+                                    }
+
+                                    ///////////////// Faculty of Allied Health Sciences 
+                                    ///////////////// BSc (Hons) Nursing (NonPayment Basis)
+                                    if (stream == "Maths" || stream == "Bio")
+                                    {
+                                        if ((al_min_s_pass_count >= 3))
+                                        {
+                                            degree_list.Add("NNP");
+                                        }
+                                    }
+
+                                    ///////////////// Faculty of Technology
+                                    ///////////////// [Bachelor of Engineering Technology Honours in Building Services Technology,Bachelor of Engineering Technology Honours in Construction Technology,Bachelor of Engineering Technology Honours in Biomedical Instrumentation Technology]
+                                    if (stream == "Maths" || stream == "Technology")
+                                    {
+                                        if (stream == "Maths")
+                                        {
+                                            if ((al_subject1 == "2" || al_subject1 == "4" || al_subject1 == "11") && (al_subject2 == "2" || al_subject2 == "4" || al_subject2 == "11") && (al_subject3 == "2" || al_subject3 == "4" || al_subject3 == "11"))
+                                            {
+                                                if (al_min_s_pass_count >= 3)
+                                                {
+                                                    if ((english_ol_grade != "F" && english_ol_grade != "AB" || english_ol_grade != "S") && (maths_ol_grade != "F" && maths_ol_grade != "AB" || maths_ol_grade != "S") && (science_ol_grade != "F" && science_ol_grade != "AB" || science_ol_grade != "S"))
+                                                    {
+                                                        degree_list.Add("BST");
+                                                        degree_list.Add("CST");
+                                                        degree_list.Add("BMT");
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        if (stream == "Technology")
+                                        {
+                                            if ((al_subject1 == "81" || al_subject1 == "83") && (al_subject2 == "81" || al_subject2 == "83") && (al_subject3 == "81" || al_subject3 == "83"))
+                                            {
+                                                if (al_min_s_pass_count >= 3)
+                                                {
+                                                    if ((english_ol_grade != "F" && english_ol_grade != "AB" || english_ol_grade != "S") && (maths_ol_grade != "F" && maths_ol_grade != "AB" || maths_ol_grade != "S") && (science_ol_grade != "F" && science_ol_grade != "AB" || science_ol_grade != "S"))
+                                                    {
+                                                        degree_list.Add("BST");
+                                                        degree_list.Add("CST");
+                                                        degree_list.Add("BMT");
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    ///////////////// Faculty of Built Environment & Spatial Sciences
+                                    ///////////////// Bachelor of Architecture
+                                    if (stream == "Maths" || stream == "Bio" || stream == "Arts")
+                                    {
+                                        if ((al_min_s_pass_count >= 3))
+                                        {
+                                            if ((maths_ol_grade != "F" && maths_ol_grade != "AB" || maths_ol_grade != "S"))
+                                            {
+                                                degree_list.Add("ARC");
+                                            }
+                                            else if (stream == "Maths")
+                                            {
+                                                degree_list.Add("ARC");
+                                            }
+                                        }
+                                    }
+
+                                    ///////////////// Faculty of Built Environment & Spatial Sciences
+                                    ///////////////// BSc (Hons) Surveying Sciences
+                                    if (stream == "Maths")
+                                    {
+                                        if ((al_min_s_pass_count >= 3))
+                                        {
+                                            if ((al_subject1 == "2" || al_subject1 == "11") && (al_subject2 == "2" || al_subject2 == "11") && (al_subject3 == "2" || al_subject3 == "11"))
+                                            {
+                                                degree_list.Add("BSV");
+                                            }
+                                        }
+                                    }
+
+                                    ///////////////// Faculty of Built Environment & Spatial Sciences
+                                    ///////////////// BSc (Hons) Quantity Surveying
+                                    if (stream == "Maths")
+                                    {
+                                        if ((al_min_s_pass_count >= 3))
+                                        {
+                                            if ((maths_ol_grade != "F" && maths_ol_grade != "AB" || maths_ol_grade != "S") && (science_ol_grade != "F" && science_ol_grade != "AB"))
+                                            {
+                                                degree_list.Add("QSH");
+                                            }
+                                        }
+                                    }
+
+                                    ///////////////// Faculty of Computing
+                                    ///////////////// BSc (Hons) Information Technology
+                                    if (stream == "Maths" || stream == "Bio" || stream == "Commerce" || stream == "Arts")
+                                    {
+                                        if ((al_min_s_pass_count >= 3))
+                                        {
+                                            degree_list.Add("BIT");
+                                        }
+                                    }
+
+                                    ///////////////// Faculty of Computing
+                                    ///////////////// BSc (Hons) Information Systems
+                                    if (stream == "Maths" || stream == "Bio" || stream == "Commerce" || stream == "Arts")
+                                    {
+                                        if ((al_min_s_pass_count >= 3))
+                                        {
+                                            degree_list.Add("BIT");
+                                        }
+                                    }
+
+                                    ///////////////// Faculty of Technology
+                                    ///////////////// Bachelor of Technology Honours in Information and Communication Technology
+                                    if (stream == "Maths" || stream == "Bio" || stream == "Technology")
+                                    {
+                                        if (stream == "Maths")
+                                        {
+                                            if ((al_subject1 == "2" || al_subject1 == "4" || al_subject1 == "11") && (al_subject2 == "2" || al_subject2 == "4" || al_subject2 == "11") && (al_subject3 == "2" || al_subject3 == "4" || al_subject3 == "11"))
+                                            {
+                                                if (al_min_s_pass_count >= 3)
+                                                {
+                                                    if ((english_ol_grade != "F" && english_ol_grade != "AB" && english_ol_grade != "S") && (maths_ol_grade != "F" && maths_ol_grade != "AB" && maths_ol_grade != "S") && (science_ol_grade != "F" && science_ol_grade != "AB" && science_ol_grade != "S"))
+                                                    {
+                                                        degree_list.Add("ICT");
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        if (stream == "Bio")
+                                        {
+                                            if ((al_subject1 == "1" || al_subject1 == "3" || al_subject1 == "12") && (al_subject2 == "1" || al_subject2 == "3" || al_subject2 == "12") && (al_subject3 == "1" || al_subject3 == "3" || al_subject3 == "12"))
+                                            {
+                                                if (al_min_s_pass_count >= 3)
+                                                {
+                                                    if ((english_ol_grade != "F" && english_ol_grade != "AB" && english_ol_grade != "S") && (maths_ol_grade != "F" && maths_ol_grade != "AB" && maths_ol_grade != "S") && (science_ol_grade != "F" && science_ol_grade != "AB" && science_ol_grade != "S"))
+                                                    {
+                                                        degree_list.Add("ICT");
+                                                    }
+                                                }
+                                            }
+                                        }
+
+                                        if (stream == "Technology")
+                                        {
+                                            degree_list.Add("ICT");
+                                        }
                                     }
                                 }
-                            }
-                        }
-
-                    }
-
-                    ///////////////// Faculty of Law
-                    ///////////////// Bachelor of Laws (LLB)
-                    if (stream == "Maths" || stream == "Bio" || stream == "Commerce" || stream == "Arts")
-                    {
-                        if ((al_min_c_pass_count >= 3) || (al_min_c_pass_count >= 2 && (al_min_s_pass_count - al_min_c_pass_count) >= 1))
-                        {
-                            if (sinhalatamil_ol_grade != "F" && sinhalatamil_ol_grade != "AB" && sinhalatamil_ol_grade != "S")
-                            {
-                                if (al_attempt == "01")
+                                else if (ageCalculationDate <= birthDay30Year && ageCalculationDate >= birthDay17Year)
                                 {
-                                    degree_list.Add("LLB");
-                                }
-                            }
-                        }
-                    }
-
-                    ///////////////// Faculty of Management, Social Sciences and Humanities
-                    ///////////////// BSc Management & Technical Sciences
-                    if (stream == "Maths" || stream == "Bio")
-                    {
-                        if ((al_min_s_pass_count >= 3))
-                        {
-                            degree_list.Add("MTS");
-                        }
-                    }
-
-                    ///////////////// Faculty of Management, Social Sciences and Humanities
-                    ///////////////// BSc Logistics Management
-                    if (stream == "Maths" || stream == "Bio" || stream == "Commerce")
-                    {
-                        if ((al_min_s_pass_count >= 3))
-                        {
-                            degree_list.Add("BLM");
-                        }
-                    }
-
-                    ///////////////// Faculty of Management, Social Sciences and Humanities
-                    ///////////////// BSc Social Sciences
-                    if ((al_min_s_pass_count >= 3))
-                    {
-                        degree_list.Add("BSS");
-                    }
-
-                    ///////////////// Faculty of Management, Social Sciences and Humanities
-                    ///////////////// BSc in Applied Data Science Communication
-                    if (stream == "Maths" || stream == "Bio" || stream == "Commerce" || stream == "Arts" || stream == "Technology")
-                    {
-                        if (stream == "Arts")
-                        {
-                            if ((al_subject1 == "38" || al_subject1 == "91") || (al_subject2 == "38" || al_subject2 == "91") || (al_subject3 == "38" || al_subject3 == "91"))
-                            {
-                                if (maths_ol_grade != "F" && maths_ol_grade != "AB" && maths_ol_grade != "S")
-                                {
-                                    degree_list.Add("ADC");
-                                }
-                            }
-                        }
-                        else if ((al_min_s_pass_count >= 3))
-                        {
-                            degree_list.Add("ADC");
-                        }
-                    }
-
-                    ///////////////// Faculty of Management, Social Sciences and Humanities
-                    ///////////////// BA in Teaching English to Speakers of Other Languages(TESOL)
-                    if ((al_min_s_pass_count >= 3))
-                    {
-                        if (english_ol_grade == "A" || english_ol_grade == "B")
-                        {
-                            degree_list.Add("BTE");
-                        }
-                    }
-
-                    ///////////////// Faculty of Computing
-                    ///////////////// [BSc (Hons) Computer Science ,BSc (Hons) Software Engineering , BSc (Hons) Computer Engineering]
-                    if (stream == "Maths" || stream == "Other")
-                    {
-                        if ((al_min_s_pass_count >= 3))
-                        {
-                            degree_list.Add("BCE");
-                            degree_list.Add("BSE");
-                            degree_list.Add("BCS");
-                        }
-                    }
-
-                    ///////////////// Faculty of Computing
-                    ///////////////// [BSc (Hons) Data Science and Business Analytics]
-                    if (stream == "Maths")
-                    {
-                        if ((al_min_s_pass_count >= 3))
-                        {
-                            degree_list.Add("DBA");
-                        }
-                    }
-
-                    ///////////////// Faculty of Allied Health Sciences 
-                    ///////////////// BSc (Hons) Nursing (Payment Basis)
-                    if (stream == "Maths" || stream == "Bio")
-                    {
-                        if ((al_min_s_pass_count >= 3))
-                        {
-                            degree_list.Add("BNP");
-                        }
-                    }
-
-                    ///////////////// Faculty of Allied Health Sciences 
-                    ///////////////// BSc (Hons) Nursing 
-                    if (stream == "Maths" || stream == "Bio")
-                    {
-                        if ((al_subject1 == "3" || al_subject1 == "4"))
-                        {
-                            if ((al_subject1_grade != "F" && al_subject1_grade != "AB" && al_subject1_grade != "S") && (al_min_s_pass_count >= 3))
-                            {
-                                degree_list.Add("PMY");
-                                degree_list.Add("MLS");
-                            }
-                        }
-                        else if ((al_subject2 == "3" || al_subject2 == "4"))
-                        {
-                            if ((al_subject2_grade != "F" && al_subject2_grade != "AB" && al_subject2_grade != "S") && (al_min_s_pass_count >= 3))
-                            {
-                                degree_list.Add("PMY");
-                                degree_list.Add("MLS");
-                            }
-                        }
-                        else if ((al_subject3 == "3" || al_subject3 == "4"))
-                        {
-                            if ((al_subject3_grade != "F" && al_subject3_grade != "AB" && al_subject3_grade != "S") && (al_min_s_pass_count >= 3))
-                            {
-                                degree_list.Add("PMY");
-                                degree_list.Add("MLS");
-                            }
-                        }
-                    }
-
-                    ///////////////// Faculty of Allied Health Sciences 
-                    ///////////////// [ BSc Honours in Physiotherapy / Radiography / Radiotherapy degree programme]
-                    if (stream == "Maths" || stream == "Bio")
-                    {
-                        if ((al_subject1 == "1" || al_subject1 == "2"))
-                        {
-                            if ((al_subject1_grade != "F" && al_subject1_grade != "AB" && al_subject1_grade != "S") && (al_min_s_pass_count >= 3))
-                            {
-                                degree_list.Add("PST");
-                                degree_list.Add("RGY");
-                                degree_list.Add("RTP");
-                            }
-                        }
-                        else if ((al_subject2 == "1" || al_subject2 == "2"))
-                        {
-                            if ((al_subject2_grade != "F" && al_subject2_grade != "AB" && al_subject2_grade != "S") && (al_min_s_pass_count >= 3))
-                            {
-                                degree_list.Add("PST");
-                                degree_list.Add("RGY");
-                                degree_list.Add("RTP");
-                            }
-                        }
-                        else if ((al_subject3 == "1" || al_subject3 == "2"))
-                        {
-                            if ((al_subject3_grade != "F" && al_subject3_grade != "AB" && al_subject3_grade != "S") && (al_min_s_pass_count >= 3))
-                            {
-                                degree_list.Add("PST");
-                                degree_list.Add("RGY");
-                                degree_list.Add("RTP");
-                            }
-                        }
-                    }
-
-                    ///////////////// Faculty of Allied Health Sciences 
-                    ///////////////// BSc (Hons) Nursing (NonPayment Basis)
-                    if (stream == "Maths" || stream == "Bio")
-                    {
-                        if ((al_min_s_pass_count >= 3))
-                        {
-                            degree_list.Add("NNP");
-                        }
-                    }
-
-                    ///////////////// Faculty of Technology
-                    ///////////////// [Bachelor of Engineering Technology Honours in Building Services Technology,Bachelor of Engineering Technology Honours in Construction Technology,Bachelor of Engineering Technology Honours in Biomedical Instrumentation Technology]
-                    if (stream == "Maths" || stream == "Technology")
-                    {
-                        if (stream == "Maths")
-                        {
-                            if ((al_subject1 == "2" || al_subject1 == "4" || al_subject1 == "11") && (al_subject2 == "2" || al_subject2 == "4" || al_subject2 == "11") && (al_subject3 == "2" || al_subject3 == "4" || al_subject3 == "11"))
-                            {
-                                if (al_min_s_pass_count >= 3)
-                                {
-                                    if ((english_ol_grade != "F" && english_ol_grade != "AB" || english_ol_grade != "S") && (maths_ol_grade != "F" && maths_ol_grade != "AB" || maths_ol_grade != "S") && (science_ol_grade != "F" && science_ol_grade != "AB" || science_ol_grade != "S"))
+                                    ///////////////// Faculty of Law
+                                    ///////////////// Bachelor of Laws (LLB)
+                                    if (stream == "Maths" || stream == "Bio" || stream == "Commerce" || stream == "Arts")
                                     {
-                                        degree_list.Add("BST");
-                                        degree_list.Add("CST");
-                                        degree_list.Add("BMT");
+                                        if ((al_min_c_pass_count >= 3) || (al_min_c_pass_count >= 2 && (al_min_s_pass_count - al_min_c_pass_count) >= 1))
+                                        {
+                                            if (sinhalatamil_ol_grade != "F" && sinhalatamil_ol_grade != "AB" && sinhalatamil_ol_grade != "S")
+                                            {
+                                                if (al_attempt == "01")
+                                                {
+                                                    degree_list.Add("LLB");
+                                                }
+                                            }
+                                        }
                                     }
                                 }
-                            }
-                        }
-                        if (stream == "Technology")
-                        {
-                            if ((al_subject1 == "81" || al_subject1 == "83") && (al_subject2 == "81" || al_subject2 == "83") && (al_subject3 == "81" || al_subject3 == "83"))
-                            {
-                                if (al_min_s_pass_count >= 3)
-                                {
-                                    if ((english_ol_grade != "F" && english_ol_grade != "AB" || english_ol_grade != "S") && (maths_ol_grade != "F" && maths_ol_grade != "AB" || maths_ol_grade != "S") && (science_ol_grade != "F" && science_ol_grade != "AB" || science_ol_grade != "S"))
-                                    {
-                                        degree_list.Add("BST");
-                                        degree_list.Add("CST");
-                                        degree_list.Add("BMT");
-                                    }
-                                }
-                            }
-                        }
-                    }
 
-                    ///////////////// Faculty of Built Environment & Spatial Sciences
-                    ///////////////// Bachelor of Architecture
-                    if (stream == "Maths" || stream == "Bio" || stream == "Arts")
-                    {
-                        if ((al_min_s_pass_count >= 3))
-                        {
-                            if ((maths_ol_grade != "F" && maths_ol_grade != "AB" || maths_ol_grade != "S"))
-                            {
-                                degree_list.Add("ARC");
-                            }
-                            else if (stream == "Maths")
-                            {
-                                degree_list.Add("ARC");
-                            }
-                        }
-                    }
-
-                    ///////////////// Faculty of Built Environment & Spatial Sciences
-                    ///////////////// BSc (Hons) Surveying Sciences
-                    if (stream == "Maths")
-                    {
-                        if ((al_min_s_pass_count >= 3))
-                        {
-                            if ((al_subject1 == "2" || al_subject1 == "11") && (al_subject2 == "2" || al_subject2 == "11") && (al_subject3 == "2" || al_subject3 == "11"))
-                            {
-                                degree_list.Add("BSV");
-                            }
-                        }
-                    }
-
-                    ///////////////// Faculty of Built Environment & Spatial Sciences
-                    ///////////////// BSc (Hons) Quantity Surveying
-                    if (stream == "Maths")
-                    {
-                        if ((al_min_s_pass_count >= 3))
-                        {
-                            if ((maths_ol_grade != "F" && maths_ol_grade != "AB" || maths_ol_grade != "S") && (science_ol_grade != "F" && science_ol_grade != "AB"))
-                            {
-                                degree_list.Add("QSH");
-                            }
-                        }
-                    }
-
-                    ///////////////// Faculty of Computing
-                    ///////////////// BSc (Hons) Information Technology
-                    if (stream == "Maths" || stream == "Bio" || stream == "Commerce" || stream == "Arts")
-                    {
-                        if ((al_min_s_pass_count >= 3))
-                        {
-                            degree_list.Add("BIT");
-                        }
-                    }
-
-                    ///////////////// Faculty of Computing
-                    ///////////////// BSc (Hons) Information Systems
-                    if (stream == "Maths" || stream == "Bio" || stream == "Commerce" || stream == "Arts")
-                    {
-                        if ((al_min_s_pass_count >= 3))
-                        {
-                            degree_list.Add("BIT");
-                        }
-                    }
-
-                    ///////////////// Faculty of Technology
-                    ///////////////// Bachelor of Technology Honours in Information and Communication Technology
-                    if (stream == "Maths" || stream == "Bio" || stream == "Technology")
-                    {
-                        if (stream == "Maths")
-                        {
-                            if ((al_subject1 == "2" || al_subject1 == "4" || al_subject1 == "11") && (al_subject2 == "2" || al_subject2 == "4" || al_subject2 == "11") && (al_subject3 == "2" || al_subject3 == "4" || al_subject3 == "11"))
-                            {
-                                if (al_min_s_pass_count >= 3)
-                                {
-                                    if ((english_ol_grade != "F" && english_ol_grade != "AB" && english_ol_grade != "S") && (maths_ol_grade != "F" && maths_ol_grade != "AB" && maths_ol_grade != "S") && (science_ol_grade != "F" && science_ol_grade != "AB" && science_ol_grade != "S"))
-                                    {
-                                        degree_list.Add("ICT");
-                                    }
-                                }
                             }
                         }
 
-                        if (stream == "Bio")
-                        {
-                            if ((al_subject1 == "1" || al_subject1 == "3" || al_subject1 == "12") && (al_subject2 == "1" || al_subject2 == "3" || al_subject2 == "12") && (al_subject3 == "1" || al_subject3 == "3" || al_subject3 == "12"))
-                            {
-                                if (al_min_s_pass_count >= 3)
-                                {
-                                    if ((english_ol_grade != "F" && english_ol_grade != "AB" && english_ol_grade != "S") && (maths_ol_grade != "F" && maths_ol_grade != "AB" && maths_ol_grade != "S") && (science_ol_grade != "F" && science_ol_grade != "AB" && science_ol_grade != "S"))
-                                    {
-                                        degree_list.Add("ICT");
-                                    }
-                                }
-                            }
-                        }
-
-                        if (stream == "Technology")
-                        {
-                            degree_list.Add("ICT");
-                        }
                     }
                 }
 

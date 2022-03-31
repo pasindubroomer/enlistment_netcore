@@ -30,10 +30,10 @@
                             }
                         }
                     },
-                    general_english_marks: {
+                    general_test_marks: {
                         validators: {
                             notEmpty: {
-                                message: 'General marks is required'
+                                message: 'General Test marks is required'
                             }
                         }
                     },
