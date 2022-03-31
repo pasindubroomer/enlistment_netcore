@@ -487,6 +487,22 @@ namespace enlistment_netcore.Controllers
 
                                     }
 
+                                    ///////////////// Faculty of Law
+                                    ///////////////// Bachelor of Laws (LLB)
+                                    if (stream == "Maths" || stream == "Bio" || stream == "Commerce" || stream == "Arts")
+                                    {
+                                        if ((al_min_c_pass_count >= 3) || (al_min_c_pass_count >= 2 && (al_min_s_pass_count - al_min_c_pass_count) >= 1))
+                                        {
+                                            if (sinhalatamil_ol_grade != "F" && sinhalatamil_ol_grade != "AB" && sinhalatamil_ol_grade != "S")
+                                            {
+                                                if (al_attempt == "01")
+                                                {
+                                                    degree_list.Add("LLB");
+                                                }
+                                            }
+                                        }
+                                    }
+
                                     ///////////////// Faculty of Management, Social Sciences and Humanities
                                     ///////////////// BSc Management & Technical Sciences
                                     if (stream == "Maths" || stream == "Bio")
@@ -744,7 +760,7 @@ namespace enlistment_netcore.Controllers
                                     {
                                         if ((al_min_s_pass_count >= 3))
                                         {
-                                            degree_list.Add("BIT");
+                                            degree_list.Add("BIS");
                                         }
                                     }
 
