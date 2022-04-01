@@ -686,7 +686,32 @@ namespace enlistment_netcore.Controllers
                                         }
                                         if (stream == "Technology")
                                         {
-                                            if ((al_subject1 == "81" || al_subject1 == "83") && (al_subject2 == "81" || al_subject2 == "83") && (al_subject3 == "81" || al_subject3 == "83"))
+
+                                            if ((al_subject1 == "81" && al_subject2 == "83") || (al_subject1 == "83" && al_subject2 == "81"))
+                                            {
+                                                if (al_min_s_pass_count >= 3)
+                                                {
+                                                    if ((english_ol_grade != "F" && english_ol_grade != "AB" || english_ol_grade != "S") && (maths_ol_grade != "F" && maths_ol_grade != "AB" || maths_ol_grade != "S") && (science_ol_grade != "F" && science_ol_grade != "AB" || science_ol_grade != "S"))
+                                                    {
+                                                        degree_list.Add("BST");
+                                                        degree_list.Add("CST");
+                                                        degree_list.Add("BMT");
+                                                    }
+                                                }
+                                            }
+                                            else if ((al_subject1 == "81" && al_subject3 == "83") || (al_subject1 == "83" && al_subject3 == "81"))
+                                            {
+                                                if (al_min_s_pass_count >= 3)
+                                                {
+                                                    if ((english_ol_grade != "F" && english_ol_grade != "AB" || english_ol_grade != "S") && (maths_ol_grade != "F" && maths_ol_grade != "AB" || maths_ol_grade != "S") && (science_ol_grade != "F" && science_ol_grade != "AB" || science_ol_grade != "S"))
+                                                    {
+                                                        degree_list.Add("BST");
+                                                        degree_list.Add("CST");
+                                                        degree_list.Add("BMT");
+                                                    }
+                                                }
+                                            }
+                                            else if ((al_subject2 == "81" && al_subject3 == "83") || (al_subject2 == "83" && al_subject3 == "81"))
                                             {
                                                 if (al_min_s_pass_count >= 3)
                                                 {
